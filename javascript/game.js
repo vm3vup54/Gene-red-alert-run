@@ -721,24 +721,20 @@ function preload() {
 
     // Load sounds and music
     this.load.audio('music', 'assets/sound/music/custom/red-alert-sprint.mp3?v=phase13-red-alert-music-1');
-    this.load.audio('underground-music', 'assets/sound/music/underground/theme.mp3');
-    this.load.audio('hurry-up-music', 'assets/sound/music/' + levelStyle +'/hurry-up-theme.mp3');
-    this.load.audio('gameoversong', 'assets/sound/music/gameover.mp3');
-    this.load.audio('win', 'assets/sound/music/win.wav');
-    this.load.audio('jumpsound', 'assets/sound/effects/jump.mp3');
-    this.load.audio('coin', 'assets/sound/effects/coin.mp3');
-    this.load.audio('powerup-appears', 'assets/sound/effects/powerup-appears.mp3');
-    this.load.audio('consume-powerup', 'assets/sound/effects/consume-powerup.mp3');
-    this.load.audio('powerdown', 'assets/sound/effects/powerdown.mp3');
-    this.load.audio('goomba-stomp', 'assets/sound/effects/goomba-stomp.wav');
-    this.load.audio('flagpole', 'assets/sound/effects/flagpole.mp3');
-    this.load.audio('fireball', 'assets/sound/effects/fireball.mp3');
-    this.load.audio('kick', 'assets/sound/effects/kick.mp3');
-    this.load.audio('time-warning', 'assets/sound/effects/time-warning.mp3');
-    this.load.audio('here-we-go', Phaser.Math.Between(0, 100) < 98 ? 'assets/sound/effects/here-we-go.mp3' : 'assets/sound/effects/cursed-here-we-go.mp3');
-    this.load.audio('pauseSound', 'assets/sound/effects/pause.wav');
-    this.load.audio('block-bump', 'assets/sound/effects/block-bump.wav');
-    this.load.audio('break-block', 'assets/sound/effects/break-block.wav');
+    this.load.audio('gameoversong', 'assets/sound/music/gameover.mp3?v=phase16-cc0-sfx-1');
+    this.load.audio('win', 'assets/sound/music/win.wav?v=phase16-cc0-sfx-1');
+    this.load.audio('jumpsound', 'assets/sound/effects/jump.mp3?v=phase16-cc0-sfx-1');
+    this.load.audio('coin', 'assets/sound/effects/coin.mp3?v=phase16-cc0-sfx-1');
+    this.load.audio('powerup-appears', 'assets/sound/effects/powerup-appears.mp3?v=phase16-cc0-sfx-1');
+    this.load.audio('consume-powerup', 'assets/sound/effects/consume-powerup.mp3?v=phase16-cc0-sfx-1');
+    this.load.audio('powerdown', 'assets/sound/effects/powerdown.mp3?v=phase16-cc0-sfx-1');
+    this.load.audio('goomba-stomp', 'assets/sound/effects/goomba-stomp.wav?v=phase16-cc0-sfx-1');
+    this.load.audio('flagpole', 'assets/sound/effects/flagpole.mp3?v=phase16-cc0-sfx-1');
+    this.load.audio('fireball', 'assets/sound/effects/fireball.mp3?v=phase16-cc0-sfx-1');
+    this.load.audio('kick', 'assets/sound/effects/kick.mp3?v=phase16-cc0-sfx-1');
+    this.load.audio('time-warning', 'assets/sound/effects/time-warning.mp3?v=phase16-cc0-sfx-1');
+    this.load.audio('block-bump', 'assets/sound/effects/block-bump.wav?v=phase16-cc0-sfx-1');
+    this.load.audio('break-block', 'assets/sound/effects/break-block.wav?v=phase16-cc0-sfx-1');
 }
 
 function initSounds() {
@@ -748,12 +744,6 @@ function initSounds() {
     this.musicTheme = this.sound.add('music', { volume: 0.15 });
     this.musicTheme.play({ loop: -1 });
     this.musicGroup.add(this.musicTheme);
-
-    this.undergroundMusicTheme = this.sound.add('underground-music', { volume: 0.15 });
-    this.musicGroup.add(this.undergroundMusicTheme);
-
-    this.hurryMusicTheme = this.sound.add('hurry-up-music', { volume: 0.15 });
-    this.musicGroup.add(this.hurryMusicTheme);
 
     this.gameOverSong = this.sound.add('gameoversong', { volume: 0.3 });
     this.musicGroup.add(this.gameOverSong);
@@ -790,12 +780,6 @@ function initSounds() {
 
     this.timeWarningSound = this.sound.add('time-warning', { volume: 0.2 });
     this.effectsGroup.add(this.timeWarningSound);
-
-    this.hereWeGoSound = this.sound.add('here-we-go', { volume: 0.17 });
-    this.effectsGroup.add(this.hereWeGoSound);
-
-    this.pauseSound = this.sound.add('pauseSound', { volume: 0.17 });
-    this.effectsGroup.add(this.pauseSound);
 
     this.blockBumpSound = this.sound.add('block-bump', { volume: 0.3 });
     this.effectsGroup.add(this.blockBumpSound);
@@ -1428,8 +1412,6 @@ function raiseFlag() {
     }
 
     this.musicTheme.stop();
-    this.undergroundMusicTheme.stop();
-    this.hurryMusicTheme.stop();
     this.flagPoleSound.play();
 
     this.tweens.add({

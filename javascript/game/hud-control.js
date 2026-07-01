@@ -718,8 +718,6 @@ function gameOverFunc() {
     }, 500);
 
     this.musicTheme.stop();
-    this.undergroundMusicTheme.stop();
-    this.hurryMusicTheme.stop();
     this.gameOverSong.play();
 
     setTimeout(() => {

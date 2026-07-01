@@ -1,5 +1,7 @@
 .agents/
 old/
+assets/sound/_original-backup/
+assets/sound/_unused-backup/
 *.log
 *.err.log
 Thumbs.db
