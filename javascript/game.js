@@ -75,6 +75,10 @@ const DEFAULT_ALERT_CONFIG = {
     alertPublisherName: '\u8b66\u5831\u767c\u5e03\u5668'
 };
 
+// Collecting a monitoring data point represents better situational awareness,
+// so it buys the player a small amount of time by rolling back accumulated rainfall.
+const DATA_POINT_RAINFALL_RELIEF_MM = 6;
+
 const startOffset = screenWidth / 2.5;
 
 // Hole with is calculated dividing the world width in x holes of the same size.
@@ -452,6 +456,10 @@ function beginFixedLevelRun() {
     createHUD.call(this);
     updateTimer.call(this);
 
+    if (activeLevelData && typeof initRockfallZones === 'function') {
+        initRockfallZones.call(this, activeLevelData);
+    }
+
     levelStarted = true;
     furthestPlayerPos = player.x;
 }
@@ -642,6 +650,8 @@ function preload() {
     this.load.image('wandering-citizen-evacuate-1', 'assets/custom/entities/wandering-citizen-frames/wandering-citizen-evacuate-1.png?v=phase10-citizen-1');
     this.load.image('wandering-citizen-evacuate-2', 'assets/custom/entities/wandering-citizen-frames/wandering-citizen-evacuate-2.png?v=phase10-citizen-1');
     this.load.image('wandering-citizen-evacuate-3', 'assets/custom/entities/wandering-citizen-frames/wandering-citizen-evacuate-3.png?v=phase10-citizen-1');
+    this.load.image('rock-pile', 'assets/custom/scenery/disaster-pack/rock-pile.png');
+    this.load.image('warning-sign-rockfall', 'assets/custom/scenery/disaster-pack/warning-sign-rockfall.png');
     this.load.spritesheet('koopa', 'assets/entities/koopa.png', { frameWidth: 16, frameHeight: 24 });
     this.load.spritesheet('shell', 'assets/entities/shell.png', { frameWidth: 16, frameHeight: 15 });
 
@@ -1526,6 +1536,16 @@ function collectCoin(player, coin) {
         collectedDataPointsCount++;
         if (typeof updateDataPointHUD === 'function') {
             updateDataPointHUD.call(this);
+        }
+
+        if (rainfallAccumulated > 0) {
+            rainfallAccumulated = Math.max(0, rainfallAccumulated - DATA_POINT_RAINFALL_RELIEF_MM);
+            if (typeof updateRainfallHUD === 'function') {
+                updateRainfallHUD.call(this);
+            }
+            if (typeof showDataPointRelief === 'function') {
+                showDataPointRelief.call(this, coin, DATA_POINT_RAINFALL_RELIEF_MM);
+            }
         }
     }
 

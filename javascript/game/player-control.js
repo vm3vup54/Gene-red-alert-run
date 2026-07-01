@@ -67,6 +67,10 @@ function createPlayer() {
 
 function decreasePlayerState() {
 
+    if (this.cameras && this.cameras.main) {
+        this.cameras.main.shake(100, 0.003);
+    }
+
     if (playerState <= 0) {
         gameOver = true;
         gameOverReason = 'enemy-hit';

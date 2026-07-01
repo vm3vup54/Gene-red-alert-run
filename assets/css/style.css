@@ -28,6 +28,10 @@ body {
   align-items: center;
   justify-content: center;
 }
+@keyframes loading-spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
 #gif {
   height: 30%;
   position: absolute;
@@ -35,6 +39,7 @@ body {
   top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
+  animation: loading-spin 1.2s linear infinite;
 }
 #gif-shadow {
   height: 30%;
@@ -45,6 +50,7 @@ body {
   transform: translate(-50%, -50%);
   opacity: 0.2;
   filter: brightness(5%) blur(5px);
+  animation: loading-spin 1.2s linear infinite;
 }
 
 .mission-intro {

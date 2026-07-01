@@ -269,6 +269,27 @@ function updateEnemies() {
     }
 }
 
+function escalateMudBoulderSpeed(multiplier) {
+    if (!this.goombasGroup) {
+        return;
+    }
+
+    let enemies = this.goombasGroup.getChildren();
+    for (let i = 0; i < enemies.length; i++) {
+        let enemy = enemies[i];
+        if (!enemy || !enemy.body || enemy.dead || enemy.enemyType !== 'mud-boulder') {
+            continue;
+        }
+
+        const currentSpeed = Math.abs(enemy.body.velocity.x) || goombasVelocityX;
+        const sign = enemy.body.velocity.x < 0 ? -1 : 1;
+        const newSpeed = currentSpeed * multiplier;
+
+        enemy.setMaxVelocity(newSpeed * 1.2, levelGravity);
+        enemy.setVelocityX(sign * newSpeed);
+    }
+}
+
 function clearGoombas() {
     let goombas = this.goombasGroup.getChildren();
 

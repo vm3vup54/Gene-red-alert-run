@@ -31,6 +31,24 @@ const LEVEL_1 = {
         "responseCenterScale": 0.78,
         "alarmMastScale": 1
     },
+    "rockfallZones": [
+        {
+            "x": 4200,
+            "intervalMs": 4800
+        },
+        {
+            "x": 9600,
+            "intervalMs": 4600
+        },
+        {
+            "x": 13000,
+            "intervalMs": 4600
+        },
+        {
+            "x": 17500,
+            "intervalMs": 4200
+        }
+    ],
     "groundSegments": [
         {
             "x": 0,
@@ -643,8 +661,7 @@ const LEVEL_1 = {
             "x": 3456,
             "y": 606,
             "originX": 3.8,
-            "originY": 0.5,
-            "reward": "fire-flower"
+            "originY": 0.5
         },
         {
             "x": 3456,
@@ -734,7 +751,8 @@ const LEVEL_1 = {
             "x": 14208,
             "y": 411,
             "originX": 0.5,
-            "originY": 0.5
+            "originY": 0.5,
+            "reward": "fire-flower"
         },
         {
             "x": 14208,

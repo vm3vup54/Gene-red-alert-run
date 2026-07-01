@@ -1,6 +1,12 @@
 
 const mushroomsVelocityX = screenWidth / 15;
 
+// Random mystery-block rewards before this fraction of the level can never roll the
+// fire-flower (helmet) power-up — it's too strong to hand out this early in the level.
+// Expressed as a fraction of worldWidth (not a fixed x) so it still lines up correctly
+// after level coordinates get rescaled to the player's screen width.
+const EARLY_SECTION_FRACTION = 8000 / 21120;
+
 function getPowerUpScale() {
     return window.themeConfig?.mode === 'custom'
         ? screenHeight / 700
@@ -39,7 +45,11 @@ function revealHiddenBlock(player, block) {
 
     if (!reward) {
         let random = Phaser.Math.Between(0, 100);
-        if (random < 90) {
+        if (block.x < worldWidth * EARLY_SECTION_FRACTION) {
+            // Early section: the fire-flower (helmet) power-up is too strong to hand out
+            // this soon, so random blocks here can only ever roll coin or the vest.
+            reward = random < 94 ? 'coin' : 'super-mushroom';
+        } else if (random < 90) {
             reward = 'coin';
         } else if (random < 96) {
             reward = 'super-mushroom';

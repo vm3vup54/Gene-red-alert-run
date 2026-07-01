@@ -270,7 +270,25 @@ function updateTimer() {
         if (!yellowAlertIssued && hasReachedYellowAlert()) {
             yellowAlertIssued = true;
             this.timeWarningSound.play();
-            showAlertBanner.call(this, `\u9ec3\u8272\u8b66\u6212\uff1a\u8acb\u52a0\u901f\u5b8c\u6210\u758f\u6563\u8207\u901a\u5831\n\u76ee\u524d ${rainfallAccumulated} mm\uff0c\u7d05\u8272\u8b66\u6212\u81e8\u754c ${activeAlertConfig.redAlertMm} mm`, 0xe0a100);
+            showAlertBanner.call(this, `\u9ec3\u8272\u8b66\u6212\uff1a\u571f\u77f3\u6d41\u52a0\u901f\uff0c\u8acb\u52a0\u901f\u5b8c\u6210\u758f\u6563\u8207\u901a\u5831\n\u76ee\u524d ${rainfallAccumulated} mm\uff0c\u7d05\u8272\u8b66\u6212\u81e8\u754c ${activeAlertConfig.redAlertMm} mm`, 0xe0a100);
+            if (typeof escalateMudBoulderSpeed === 'function') {
+                escalateMudBoulderSpeed.call(this, 1.35);
+            }
+            if (typeof escalateRockfallZones === 'function') {
+                escalateRockfallZones.call(this, 0.75);
+            }
+        }
+
+        if (!this.dangerTierTwoIssued && rainfallAccumulated >= activeAlertConfig.redAlertMm * 0.9) {
+            this.dangerTierTwoIssued = true;
+            this.timeWarningSound.play();
+            showAlertBanner.call(this, `\u7d05\u8272\u8b66\u6212\u903c\u8fd1\uff1a\u571f\u77f3\u6d41\u518d\u6b21\u52a0\u901f\uff01\n\u8acb\u7acb\u5373\u5b8c\u6210\u901a\u5831`, 0xff5f3f);
+            if (typeof escalateMudBoulderSpeed === 'function') {
+                escalateMudBoulderSpeed.call(this, 1.35);
+            }
+            if (typeof escalateRockfallZones === 'function') {
+                escalateRockfallZones.call(this, 0.75);
+            }
         }
 
         updateRainfallHUD.call(this);
@@ -356,6 +374,34 @@ function updateRainfallHUD() {
     if (typeof syncAlertWeatherVisuals === 'function') {
         syncAlertWeatherVisuals.call(this);
     }
+}
+
+function showDataPointRelief(originObject, amount) {
+    if (!originObject || typeof originObject.getBounds !== 'function') return;
+
+    const bounds = originObject.getBounds();
+    const textEffect = this.add.text(bounds.x, bounds.y, `-${amount}mm`, {
+        fontFamily: '"Microsoft JhengHei", "Noto Sans TC", sans-serif',
+        fontSize: (screenWidth / 130),
+        color: '#7fe3ff',
+        fontStyle: 'bold'
+    });
+
+    textEffect.setOrigin(0.5, 1).depth = 5;
+
+    this.tweens.add({
+        targets: textEffect,
+        duration: 700,
+        y: textEffect.y - screenHeight / 7,
+        onComplete: () => {
+            this.tweens.add({
+                targets: textEffect,
+                duration: 150,
+                alpha: 0,
+                onComplete: () => textEffect.destroy()
+            });
+        }
+    });
 }
 
 function addToScore(num, originObject) {
@@ -623,7 +669,7 @@ function gameOverScreen() {
         educationLine: getFailureReasonText(),
         educationColor: '#ffc1c1',
         statusLine: '\u4efb\u52d9\u5224\u5b9a\uff1a\u672a\u5728\u8b66\u6212\u6642\u9650\u5167\u5b8c\u6210\u901a\u5831',
-        footerLine: '\u5ba3\u5c0e\u91cd\u9ede\uff1a\u967d\u964d\u96e8\u91cf\u63a5\u8fd1\u8b66\u6212\u57fa\u6e96\u503c\u6642\uff0c\u61c9\u52a0\u901f\u5b8c\u6210\u9810\u8b66\u3001\u758f\u6563\u8207\u907f\u96e3\u61c9\u8b8a\u3002',
+        footerLine: '\u5ba3\u5c0e\u91cd\u9ede\uff1a\u7576\u964d\u96e8\u91cf\u63a5\u8fd1\u8b66\u6212\u57fa\u6e96\u503c\u6642\uff0c\u61c9\u52a0\u901f\u5b8c\u6210\u9810\u8b66\u3001\u758f\u6563\u8207\u907f\u96e3\u61c9\u8b8a\u3002',
         accentColor: 0xff6b6b
     });
 }
@@ -633,6 +679,9 @@ function gameOverFunc() {
     if (this.rainfallTimerHandle) {
         clearTimeout(this.rainfallTimerHandle);
         this.rainfallTimerHandle = null;
+    }
+    if (typeof stopRockfallZones === 'function') {
+        stopRockfallZones.call(this);
     }
 
     player.anims.play('hurt', true);
@@ -684,6 +733,9 @@ function winScreen() {
     if (this.rainfallTimerHandle) {
         clearTimeout(this.rainfallTimerHandle);
         this.rainfallTimerHandle = null;
+    }
+    if (typeof stopRockfallZones === 'function') {
+        stopRockfallZones.call(this);
     }
 
     if (this.evacuationCrowd) {
