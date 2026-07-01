@@ -1,0 +1,331 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
+
+@font-face {
+  font-family: pixel_nums;
+  src: url('../fonts/SuperMario.ttf');
+}
+html,
+body {
+  zoom: 100%;
+  max-zoom: 100%;
+  min-zoom: 100%;
+  background: rgb(132, 132, 255);
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  color: #f0f0f0;
+  font-family: pixel_nums;
+}
+#game {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  width: 100%;
+  font-family: pixel_nums;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#gif {
+  height: 30%;
+  position: absolute;
+  z-index: 100;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#gif-shadow {
+  height: 30%;
+  position: absolute;
+  z-index: 99;
+  top: 31%;
+  left: 51%;
+  transform: translate(-50%, -50%);
+  opacity: 0.2;
+  filter: brightness(5%) blur(5px);
+}
+
+.mission-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: grid;
+  place-items: center;
+  padding: 14px;
+  box-sizing: border-box;
+  background:
+    repeating-linear-gradient(115deg, rgba(219, 237, 255, 0.16) 0 2px, transparent 2px 28px),
+    linear-gradient(180deg, #59617c 0%, #7d859f 56%, #596b58 100%);
+  font-family: "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+  color: #fff;
+}
+
+.mission-intro.is-hidden {
+  display: none;
+}
+
+.mission-intro__panel {
+  width: min(1210px, 96vw);
+  max-height: calc(100vh - 28px);
+  overflow: hidden;
+  padding: 14px;
+  border: 4px solid #2f3444;
+  background: rgba(20, 25, 34, 0.88);
+  box-shadow: 0 18px 0 rgba(0, 0, 0, 0.26), 0 0 0 4px rgba(255, 255, 255, 0.08) inset;
+}
+
+.mission-intro__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.55fr);
+  gap: 12px;
+  align-items: center;
+  padding: 12px 18px;
+  background: linear-gradient(135deg, rgba(22, 36, 48, 0.95), rgba(63, 71, 87, 0.9));
+  border: 2px solid rgba(255, 255, 255, 0.24);
+}
+
+.mission-intro__kicker {
+  margin: 0 0 8px;
+  color: #ffd86a;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.mission-intro h1 {
+  margin: 0;
+  font-size: 44px;
+  line-height: 1.06;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.mission-intro__summary {
+  margin: 8px 0 0;
+  max-width: 740px;
+  color: #e9f0ff;
+  font-size: 19px;
+  line-height: 1.45;
+  font-weight: 700;
+}
+
+.mission-intro__hero-art {
+  display: grid;
+  grid-template-columns: 0.8fr 0.7fr 1.4fr;
+  align-items: end;
+  gap: 8px;
+  min-height: 126px;
+}
+
+.mission-intro__hero-art img {
+  max-width: 100%;
+  max-height: 128px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 8px 0 rgba(0, 0, 0, 0.32));
+}
+
+.mission-intro__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.mission-card {
+  min-height: 0;
+  padding: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.22);
+  background: rgba(246, 249, 255, 0.1);
+}
+
+.mission-card--wide {
+  grid-column: span 2;
+}
+
+.mission-card--controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: rgba(255, 216, 106, 0.16);
+}
+
+.mission-card--controls p {
+  line-height: 1.45;
+}
+
+.mission-controls {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.mission-controls p {
+  margin: 0;
+}
+
+.mission-card h2 {
+  margin: 0 0 10px;
+  color: #ffd86a;
+  font-size: 24px;
+}
+
+.mission-card p {
+  margin: 6px 0 0;
+  color: #eef4ff;
+  font-size: 18px;
+  line-height: 1.42;
+  font-weight: 700;
+}
+
+.mission-card strong {
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.28);
+  padding: 3px 7px;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+}
+
+.mission-card__row,
+.mission-card__icons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.mission-card figure {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  margin: 0;
+  min-width: 92px;
+}
+
+.mission-card figcaption {
+  color: #dfe9ff;
+  font-size: 19px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.mission-card img {
+  max-width: 124px;
+  max-height: 98px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.mission-card__row--small img {
+  max-width: 88px;
+  max-height: 72px;
+}
+
+.mission-card__icons img {
+  max-width: 165px;
+  max-height: 104px;
+}
+
+.mission-card--wide .mission-card__row {
+  gap: 18px;
+}
+
+.mission-card--wide .mission-card__row figure {
+  min-width: 132px;
+}
+
+.mission-card--wide img {
+  max-width: 145px;
+  max-height: 112px;
+}
+
+.mission-intro__start {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  margin: 12px auto 0;
+  border: 3px solid #2d2412;
+  background: linear-gradient(180deg, #ffd86a, #f59b2e);
+  color: #1f1b12;
+  font-family: "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 7px 0 #7e4c15;
+}
+
+.mission-intro__start:hover {
+  transform: translateY(1px);
+  box-shadow: 0 6px 0 #7e4c15;
+}
+
+.mission-intro__start:active {
+  transform: translateY(6px);
+  box-shadow: 0 1px 0 #7e4c15;
+}
+
+@media (max-width: 860px) {
+  .mission-intro {
+    padding: 12px;
+  }
+
+  .mission-intro__panel {
+    padding: 14px;
+  }
+
+  .mission-intro__hero,
+  .mission-intro__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mission-intro h1 {
+    white-space: normal;
+  }
+
+  .mission-card--wide,
+  .mission-card--controls {
+    grid-column: auto;
+  }
+
+  .mission-intro__hero-art {
+    grid-template-columns: repeat(3, 1fr);
+    min-height: 120px;
+  }
+
+  .mission-intro__hero-art img {
+    max-height: 125px;
+  }
+}
+
+/* Noscript alert */
+.alertpopup {
+  position: fixed;
+  z-index: 1039;
+  width: 35vw;
+  max-width: 1440px;
+  background: rgba(50, 50, 50, 0.25);
+  box-shadow: 0 0.75rem 2rem 0 rgba(0, 0, 0, 0.15);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  padding-right: 4rem;
+  padding-left: 4rem;
+  margin-left: 50%;
+  margin-right: 50%;
+  font-family: 'Quicksand', sans-serif;
+}
+.blurbg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1040;
+    width: 100%;
+    height: 100%;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
+    background: rgba(50, 50, 50, 0.15);
+    display: grid;
+    box-sizing: content-box;
+    place-items: center;
+}

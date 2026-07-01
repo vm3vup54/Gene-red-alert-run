@@ -1,0 +1,6 @@
+.agents/
+*.log
+*.err.log
+Thumbs.db
+.DS_Store
+
