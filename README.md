@@ -295,3 +295,8 @@ gene-landslide-red-alert/
 
 原始遊戲程式基礎來自開源專案 `Super-Mario-Phaser`。  
 本專案在其基礎上進行主題改造、關卡資料化、素材替換與教育化互動設計，作為防災教育原型使用。
+
+音效補充說明：
+
+- 遊戲內實際使用的短音效已替換為開源 CC0 資源，完整對照可見 `assets/sound/SOURCES.md`
+- 主題曲 `assets/sound/music/custom/red-alert-sprint.mp3` 為以 Gemini 製作的原創音樂素材
